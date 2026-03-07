@@ -1,4 +1,6 @@
-# Custom Agents Config
+# Custom Agents Config 
+
+## Agente Orquestador para proyectos backend (Node.js/ts)
 
 Este repositorio contiene la configuración personalizada para los agentes de [OpenCode](https://opencode.ai) y sus respectivos prompts, organizados para proveer subagentes especializados (`backend`, `write-code`, `write-test`, `write-doc`, `extend-project`).
 
