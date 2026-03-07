@@ -4,6 +4,10 @@ Este repositorio contiene la configuración personalizada para los agentes de [O
 
 El objetivo es compartir un entorno de inteligencia artificial estandarizado y reproducible para cualquier usuario de la organización o comunidad.
 
+![Gato lindo](./Diagrama-imagen.png)
+
+
+
 ## Requisitos Previos
 
 Antes de configurar este proyecto en un entorno nuevo, asegúrate de tener instalado:
