@@ -1,54 +1,15 @@
 {
-    "mcp": {
-        "systemFile": {
-            "type": "local",
-            "command": [
-                "/home/joelrd01/.nvm/versions/node/v22.21.0/bin/npx",
-                "-y",
-                "@modelcontextprotocol/server-filesystem",
-                "/home/joelrd01/"
-            ],
-            "enabled": true
-        },
-        "cli_MCP": {
-            "type": "local",
-            "command": [
-                "uvx",
-                "cli-mcp-server"
-            ],
-            "environment": {
-                "ALLOWED_DIR": "/home/joelrd01/",
-                "ALLOWED_COMMANDS": "ls,cat,pwd,echo,mkdir,rm,cp,mv,find,grep,tree,wc",
-                "ALLOWED_FLAGS": "-l,-a,--help,--version,-r,-f,-p,-n,-i,-L,-I",
-                "MAX_COMMAND_LENGTH": "2048",
-                "COMMAND_TIMEOUT": "60",
-                "ALLOW_SHELL_OPERATORS": "false"
-            },
-            "enabled": false
-        },
-        "npmAnalyzer": {
-            "type": "local",
-            "command": [
-                "npx",
-                "-y",
-                "@nekzus/mcp-server"
-            ],
-            "enabled": true
-        },
-        "pencil": {
-            "command": [
-                "/home/joelrd01/.antigravity/extensions/highagency.pencildev-0.6.29-universal/out/mcp-server-linux-x64",
-                "--app",
-                "antigravity"
-            ],
-            "enabled": true,
-            "type": "local"
-        }
-    },
+    "mcp": {},
     "agent": {
         "orchestrator": {
             "mode": "primary",
             "prompt": "{file:./prompt-agent/orquestrator.md}",
+            "temperature": 0.4,
+            "quick-thinker": {
+                "description": "Fast reasoning with limited iterations",
+                "prompt": "You are a quick thinker. write continue for continue the task",
+                "steps": 8
+            },
             "readonly": {
                 "tools": {
                     "*": "deny"
@@ -68,13 +29,17 @@
         "backend": {
             "mode": "subagent",
             "prompt": "{file:./prompt-agent/backend.md}",
+            "temperature": 0.7,
             "hidden": true,
             "readonly": {
                 "tools": {
-                    "*": "deny"
+                    "*": "allow"
                 }
             },
             "permission": {
+                "read": "allow",
+                "list": "allow",
+                "grep": "allow",
                 "task": {
                     "*": "deny",
                     "write-code": "allow",
@@ -83,27 +48,20 @@
                     "extend-project": "allow"
                 },
                 "bash": {
-                    "*": "deny",
-                    "find": "allow",
-                    "grep": "allow",
-                    "locate": "allow",
-                    "which": "allow",
-                    "cat": "allow",
-                    "less": "allow",
-                    "head": "allow",
-                    "tail": "allow",
-                    "strings": "allow",
-                    "ls": "allow",
-                    "stat": "allow",
-                    "file": "allow",
-                    "du": "allow",
-                    "pwd": "allow",
-                    "realpath": "allow",
-                    "info": "allow"
+                    "*": "ask",
+                    "ls *": "allow",
+                    "cat *": "allow",
+                    "pwd *": "allow",
+                    "echo *": "allow",
+                    "find *": "allow",
+                    "tree *": "allow",
+                    "grep *": "allow",
+                    "wc *": "allow"
                 }
             },
             "tools": {
                 "*": false,
+                "list": true,
                 "read": true,
                 "bash": true
             }
@@ -111,13 +69,18 @@
         "write-code": {
             "mode": "subagent",
             "hidden": true,
+            "temperature": 0.5,
             "prompt": "{file:./prompt-agent/write-code.md}",
             "readonly": {
                 "tools": {
-                    "*": "ask"
+                    "*": "allow"
                 }
             },
             "permission": {
+                "edit": "allow",
+                "list": "allow",
+                "read": "allow",
+                "grep": "allow",
                 "task": {
                     "*": "deny",
                     "write-test": "allow",
@@ -125,43 +88,87 @@
                     "extend-project": "allow"
                 },
                 "bash": {
-                    "*": "ask"
+                    "*": "ask",
+                    "npm *": "allow",
+                    "git *": "allow",
+                    "grep *": "allow",
+                    "ls *": "allow",
+                    "cat *": "allow",
+                    "pwd *": "allow",
+                    "echo *": "allow",
+                    "mkdir *": "allow",
+                    "rm *": "ask",
+                    "cp *": "allow",
+                    "mv *": "allow",
+                    "find *": "allow",
+                    "tree *": "allow",
+                    "wc *": "allow"
                 }
             },
             "tools": {
-                "*": true
+                "*": false,
+                "list": true,
+                "read": true,
+                "edit": true,
+                "grep": true,
+                "bash": true
             }
         },
         "write-test": {
             "mode": "subagent",
             "hidden": true,
+            "temperature": 0.5,
             "prompt": "{file:./prompt-agent/write-test.md}",
             "readonly": {
                 "tools": {
-                    "*": "ask"
+                    "*": "allow"
                 }
             },
             "permission": {
+                "edit": "allow",
+                "list": "allow",
+                "read": "allow",
+                "grep": "allow",
                 "task": {
                     "*": "deny",
                     "write-code": "allow",
                     "extend-project": "allow"
                 },
                 "bash": {
-                    "*": "ask"
+                    "*": "ask",
+                    "npm *": "allow",
+                    "git *": "allow",
+                    "grep *": "allow",
+                    "ls *": "allow",
+                    "cat *": "allow",
+                    "pwd *": "allow",
+                    "echo *": "allow",
+                    "mkdir *": "allow",
+                    "rm *": "ask",
+                    "cp *": "allow",
+                    "mv *": "allow",
+                    "find *": "allow",
+                    "tree *": "allow",
+                    "wc *": "allow"
                 }
             },
             "tools": {
-                "*": true
+                "*": false,
+                "list": true,
+                "read": true,
+                "edit": true,
+                "grep": true,
+                "bash": true
             }
         },
         "write-doc": {
             "mode": "subagent",
             "hidden": true,
+            "temperature": 0.5,
             "prompt": "{file:./prompt-agent/write-doc.md}",
             "readonly": {
                 "tools": {
-                    "*": "ask"
+                    "*": "allow"
                 }
             },
             "permission": {
@@ -170,20 +177,34 @@
                     "extend-project": "allow"
                 },
                 "bash": {
-                    "*": "ask"
+                    "*": "ask",
+                    "grep *": "allow",
+                    "ls *": "allow",
+                    "cat *": "allow",
+                    "pwd *": "allow",
+                    "echo *": "allow",
+                    "find *": "allow",
+                    "tree *": "allow",
+                    "wc *": "allow"
                 }
             },
             "tools": {
-                "*": true
+                "*": false,
+                "list": true,
+                "read": true,
+                "edit": true,
+                "grep": true,
+                "bash": true
             }
         },
         "extend-project": {
             "mode": "subagent",
             "hidden": true,
+            "temperature": 0.5,
             "prompt": "{file:./prompt-agent/extend-project.md}",
             "readonly": {
                 "tools": {
-                    "*": "ask"
+                    "*": "allow"
                 }
             },
             "permission": {
@@ -194,11 +215,30 @@
                     "write-doc": "allow"
                 },
                 "bash": {
-                    "*": "ask"
+                    "*": "ask",
+                    "npm *": "allow",
+                    "git *": "allow",
+                    "grep *": "allow",
+                    "ls *": "allow",
+                    "cat *": "allow",
+                    "pwd *": "allow",
+                    "echo *": "allow",
+                    "mkdir *": "allow",
+                    "rm *": "ask",
+                    "cp *": "allow",
+                    "mv *": "allow",
+                    "find *": "allow",
+                    "tree *": "allow",
+                    "wc *": "allow"
                 }
             },
             "tools": {
-                "*": true
+                "*": false,
+                "list": true,
+                "read": true,
+                "edit": true,
+                "grep": true,
+                "bash": true
             }
         }
     }
