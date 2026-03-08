@@ -12,14 +12,13 @@ El objetivo es compartir un entorno de inteligencia artificial estandarizado y r
 
 Antes de configurar este proyecto en un entorno nuevo, asegúrate de tener instalado:
 
-1. **Node.js (v22+) y npm / npx**: Varios MCP Servers usados (como `@nekzus/mcp-server` o `@modelcontextprotocol/server-filesystem`) requerirán `npx` para ejecutarse.
-2. **OpenCode**: Asegúrate de tener la app u la herramienta principal desde donde interactúas con los agentes base instalada.
+1. **OpenCode**: Asegúrate de tener la app u la herramienta principal desde donde interactúas con los agentes base instalada.
 
 ## Instalación y Configuración
 
 Sigue estos pasos para duplicar este espacio de trabajo en cualquier equipo:
 
-1. **Clonar este repositorio** dentro del directorio de configuración de OpenCode local home/.config/opencode:
+1. **Clonar este repositorio**:
 
    ```bash
    git clone https://github.com/Joel-RD/opencode-custom-agents.git
@@ -29,6 +28,10 @@ Sigue estos pasos para duplicar este espacio de trabajo en cualquier equipo:
 
  - desing
  - prompt-agent
+ - custom-agents.json en opencode.json
+
+ ### **Nota**: 
+ - Tenga cuidado al copiar el json de custom-agents.json en opencode.json ya que esto puede reescribir los agentes propios
 
 ## Configuración de Agentes
 
