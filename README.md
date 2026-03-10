@@ -2,6 +2,8 @@
 
 ## Agente Orquestador para proyectos backend (Node.js/ts)
 
+![alt text](custom-agent.png)
+
 Este repositorio contiene la configuración personalizada para los agentes de [OpenCode](https://opencode.ai) y sus respectivos prompts, organizados para proveer subagentes especializados (`orchestrator`, `core`, `code-creator`, `code-modifier`, `documenter`, `tester`).
 
 El objetivo es compartir un entorno de inteligencia artificial estandarizado y reproducible para cualquier usuario de la organización o comunidad.
